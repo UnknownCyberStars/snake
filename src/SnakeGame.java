@@ -287,7 +287,7 @@ public class SnakeGame extends JPanel {
 
         // 返回主菜单按钮
         menuBtn = new JButton("返回主菜单");
-        // ... 样式设置 ...
+        // ... 样式设置 .../
         menuBtn.setVisible(false);
         menuBtn.addActionListener(e -> {
             Window w = SwingUtilities.getWindowAncestor(this);
