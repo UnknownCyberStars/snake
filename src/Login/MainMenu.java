@@ -95,7 +95,7 @@ public class MainMenu extends JFrame
         setLayout(new GridLayout(5,1));
         setBounds(250,200,420,400);
 
-        Color bgColor=new Color(245,250,245);
+        Color bgColor=new Color(40,44,52);
         Color accentColor=new Color(76,175,80);
 
         for(int i=0;i<lb.length;i++) lb[i]=new JLabel(label[i]);
