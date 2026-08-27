@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="合并了飞飞的主菜单" />
+    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="新增：登录注册、主菜单界面">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Snake.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Snake.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SnakeGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +170,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="新增MySQL数据库功能和完善登录注册界面" />
     <MESSAGE value="新增：登录注册、主菜单界面" />
-    <MESSAGE value="合并了飞飞的主菜单" />
-    <option name="LAST_COMMIT_MESSAGE" value="合并了飞飞的主菜单" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增：登录注册、主菜单界面" />
   </component>
 </project>
