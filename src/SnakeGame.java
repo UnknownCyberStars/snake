@@ -43,6 +43,16 @@ public class SnakeGame extends JPanel {
     private final Timer logicTimer;                // 逻辑步进
     private final Timer renderTimer;               // 渲染(食物脉动动画等)
 
+    // ---------- 按钮 ----------
+    private JButton restartBtn;
+    private JButton menuBtn;
+
+    // ---------- 时间统计 ----------
+    private long gameStartTime;          // 游戏开始（或恢复）时的系统时间
+    private long totalPausedTime = 0;    // 累计暂停时间（毫秒）
+    private long pauseStartTime = 0;     // 进入暂停时的系统时间
+    private long finalElapsedSeconds = 0; // 游戏结束时保存的总秒数
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("贪吃蛇 — ESC 退出");
@@ -61,12 +71,14 @@ public class SnakeGame extends JPanel {
         setPreferredSize(new Dimension(W, H));
         setBackground(new Color(0x13, 0x17, 0x22));
         setFocusable(true);
+        setLayout(null);
         addKeyListener(new KeyAdapter() {
             @Override public void keyPressed(KeyEvent e) { onKey(e.getKeyCode()); }
         });
         addMouseListener(new MouseAdapter() {
             @Override public void mousePressed(MouseEvent e) { requestFocusInWindow(); }
         });
+        createButtons();
         logicTimer = new Timer(TICK_START, e -> step());
         renderTimer = new Timer(FRAME_MS, e -> repaint());
         resetGame();
@@ -91,7 +103,10 @@ public class SnakeGame extends JPanel {
         int safeLen = nh.equals(food) ? body.size() : body.size() - 1;
         for (int i = 0; i < safeLen; i++) {
             if (body.get(i).equals(nh)) {
+                finalElapsedSeconds = getElapsedSeconds();  // 保存最终时间
                 state = State.GAME_OVER;
+                showButtons();
+                saveScoreToDatabase();  // 预留数据库接口
                 return;
             }
         }
@@ -126,6 +141,12 @@ public class SnakeGame extends JPanel {
         state = State.RUNNING;
         logicTimer.setDelay(TICK_START);
         spawnFood();
+        gameStartTime = System.currentTimeMillis();//时间初始化
+        totalPausedTime = 0;
+        pauseStartTime = 0;
+        finalElapsedSeconds = 0;
+        hideButtons();              //隐藏按钮
+        requestFocusInWindow();     //重新获得键盘焦点
     }
 
     /** 初始重置: 棋盘中央, 朝右, 等待开始 */
@@ -140,6 +161,12 @@ public class SnakeGame extends JPanel {
         score = 0;
         state = State.READY;
         spawnFood();
+        //时间初始化
+        gameStartTime = System.currentTimeMillis();
+        totalPausedTime = 0;
+        pauseStartTime = 0;
+        finalElapsedSeconds = 0;
+        hideButtons();
     }
 
     /** 在棋盘上随机生成食物(保证不出现在蛇身上) */
@@ -165,8 +192,13 @@ public class SnakeGame extends JPanel {
         if (code == KeyEvent.VK_ESCAPE) { System.exit(0); return; }
         if (code == KeyEvent.VK_R) { restart(Dir.RIGHT); return; }
         if (code == KeyEvent.VK_SPACE) {
-            if (state == State.RUNNING) state = State.PAUSED;
-            else if (state == State.PAUSED) state = State.RUNNING;
+            if (state == State.RUNNING) {
+                state = State.PAUSED;
+                pauseStartTime = System.currentTimeMillis();  //记录暂停开始
+            } else if (state == State.PAUSED) {
+                state = State.RUNNING;
+                totalPausedTime += System.currentTimeMillis() - pauseStartTime;  //累加暂停时长
+            }
             return;
         }
         Dir d = dirOf(code);
@@ -211,7 +243,86 @@ public class SnakeGame extends JPanel {
             || (a == Dir.LEFT && b == Dir.RIGHT) || (a == Dir.RIGHT && b == Dir.LEFT);
     }
 
+    private long getElapsedSeconds() {
+        if (state == State.GAME_OVER) {
+            return finalElapsedSeconds;
+        }
+        long current = System.currentTimeMillis();
+        long elapsed = current - gameStartTime - totalPausedTime;
+        return elapsed / 1000;
+    }
+    private void saveScoreToDatabase() {
+        // =============================================
+        //预留接口：等数据库完成后在此处接入
+        // 需要的参数：score（得分），finalElapsedSeconds（用时秒数）
+        // =============================================
+
+        // 目前先打印到控制台，方便测试
+        System.out.println("📝 准备保存到数据库:");
+        System.out.println("   得分: " + score);
+        System.out.println("   用时: " + finalElapsedSeconds + " 秒");
+        System.out.println("   时间: " + String.format("%02d:%02d",
+                finalElapsedSeconds / 60, finalElapsedSeconds % 60));
+
+        // =============================================
+        // 以后替换为：
+        // DatabaseHelper.saveRecord(score, finalElapsedSeconds);
+        // =============================================
+    }
+
     // ================= 渲染 =================
+    /** 创建并配置两个按钮 */
+    private void createButtons() {
+        // 重新开始按钮
+        restartBtn = new JButton("重新开始");
+        restartBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
+        restartBtn.setForeground(Color.WHITE);
+        restartBtn.setBackground(new Color(60, 80, 100));
+        // ... 样式设置 ...
+        restartBtn.setVisible(false);
+        restartBtn.addActionListener(e -> {
+            restart(Dir.RIGHT);
+            hideButtons();
+        });
+
+        // 返回主菜单按钮
+        menuBtn = new JButton("返回主菜单");
+        // ... 样式设置 ...
+        menuBtn.setVisible(false);
+        menuBtn.addActionListener(e -> {
+            Window w = SwingUtilities.getWindowAncestor(this);
+            if (w != null) w.dispose();
+        });
+
+        // 放置位置
+        int btnW = 110, btnH = 40;
+        int gap = 20;
+        int totalW = btnW * 2 + gap;
+        int startX = (W - totalW) / 2;
+        int y = H / 2 + 70;
+
+        restartBtn.setBounds(startX, y, btnW, btnH);
+        menuBtn.setBounds(startX + btnW + gap, y, btnW, btnH);
+
+        add(restartBtn);
+        add(menuBtn);
+    }
+
+    private void showButtons() {
+        SwingUtilities.invokeLater(() -> {
+            restartBtn.setVisible(true);
+            menuBtn.setVisible(true);
+            restartBtn.setFocusable(false);
+            menuBtn.setFocusable(false);
+        });
+    }
+
+    private void hideButtons() {
+        SwingUtilities.invokeLater(() -> {
+            restartBtn.setVisible(false);
+            menuBtn.setVisible(false);
+        });
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -303,6 +414,13 @@ public class SnakeGame extends JPanel {
         g2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
         String scoreStr = "得分 " + score + "    长度 " + body.size();
         drawText(g2, scoreStr, 12, 24, Color.WHITE);
+        //时间显示
+        long elapsed = getElapsedSeconds();
+        String timeStr = String.format("%02d:%02d", elapsed / 60, elapsed % 60);
+        FontMetrics fm = g2.getFontMetrics();
+        int timeWidth = fm.stringWidth("时间 " + timeStr);
+        drawText(g2, "时间 " + timeStr, W - timeWidth - 12, 24, Color.WHITE);
+        //帮助信息
         g2.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
         String help = "方向键/WASD 转向 · 空格 暂停 · R 重开 · ESC 退出";
         drawText(g2, help, W / 2 - g2.getFontMetrics().stringWidth(help) / 2, H - 14,
@@ -325,8 +443,10 @@ public class SnakeGame extends JPanel {
             msg = "已暂停";
             sub = "按空格继续";
         } else if (state == State.GAME_OVER) {
+            long totalSec = finalElapsedSeconds;
+            String timeStr = String.format("%02d:%02d", totalSec / 60, totalSec % 60);
             msg = "游戏结束 · 得分 " + score;
-            sub = "按 R 或方向键重新开始";
+            sub = "总用时 " + timeStr + "  ·  点击下方按钮继续";
         }
         if (msg == null) return;
         g2.setColor(new Color(0, 0, 0, 150));
