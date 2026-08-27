@@ -67,6 +67,19 @@
       <recent name="D:\Java-workspace\IDEA\Greedy_Snake" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Snake" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Snake" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -90,7 +103,7 @@
       <workItem from="1787790639901" duration="7186000" />
       <workItem from="1787797941746" duration="5455000" />
       <workItem from="1787807668165" duration="433000" />
-      <workItem from="1787812208985" duration="946000" />
+      <workItem from="1787812208985" duration="1469000" />
     </task>
     <task id="LOCAL-00001" summary="新增MySQL数据库功能和完善登录注册界面">
       <option name="closed" value="true" />
@@ -124,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787812988668</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="新增：登录注册、主菜单界面">
+      <option name="closed" value="true" />
+      <created>1787813224823</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1787813224823</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
