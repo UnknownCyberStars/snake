@@ -152,7 +152,7 @@ class MyListener implements ActionListener,KeyListener,MouseListener
                 JOptionPane.showMessageDialog(frame,"该用户名已被注册，请更换用户名！","注册失败",JOptionPane.WARNING_MESSAGE);
                 continue;
             }
-            String sql="INSERT INTO table1(name, password, max_exp, time, phonenumber) VALUES(" +dan+name+dan+","+dan+password1+dan+",0,NOW(),"+dan+phone+dan+")";
+            String sql="INSERT INTO table1(name, password, max_exp, time, phonenumber) VALUES(" +dan+name+dan+","+dan+password1+dan+",0,0,"+dan+phone+dan+")";
             if(dataBase.insert(sql)) {
                 JOptionPane.showMessageDialog(frame,"注册成功，请使用新账户登录！","恭喜",JOptionPane.INFORMATION_MESSAGE);
                 return;
@@ -193,7 +193,7 @@ class MyListener implements ActionListener,KeyListener,MouseListener
         } else if(result[0].equals(password)) {
             JOptionPane.showMessageDialog(frame,"验证通过，登录成功！","恭喜",JOptionPane.INFORMATION_MESSAGE);
             frame.dispose();
-            new MainMenu();
+            new MainMenu(name);
         } else {
             JOptionPane.showMessageDialog(frame,"账号和密码不一致，请重新输入！","登录失败",JOptionPane.WARNING_MESSAGE);
         }

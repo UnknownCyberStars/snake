@@ -1,5 +1,7 @@
 package Play;
 
+import Login.MySQLDataBase;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -54,8 +56,10 @@ public class SnakeGame extends JPanel {
     private long totalPausedTime = 0;    // 累计暂停时间（毫秒）
     private long pauseStartTime = 0;     // 进入暂停时的系统时间
     private long finalElapsedSeconds = 0; // 游戏结束时保存的总秒数
+    private static String playerName = "";
 
     public static void main(String[] args) {
+        if (args.length > 0) playerName = args[0];
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("贪吃蛇 — ESC 退出");
             frame.setResizable(false);
@@ -253,23 +257,15 @@ public class SnakeGame extends JPanel {
         long elapsed = current - gameStartTime - totalPausedTime;
         return elapsed / 1000;
     }
-    private void saveScoreToDatabase() {
-        // =============================================
-        //预留接口：等数据库完成后在此处接入
-        // 需要的参数：score（得分），finalElapsedSeconds（用时秒数）
-        // =============================================
-
-        // 目前先打印到控制台，方便测试
-        System.out.println("📝 准备保存到数据库:");
-        System.out.println("   得分: " + score);
-        System.out.println("   用时: " + finalElapsedSeconds + " 秒");
-        System.out.println("   时间: " + String.format("%02d:%02d",
-                finalElapsedSeconds / 60, finalElapsedSeconds % 60));
-
-        // =============================================
-        // 以后替换为：
-        // DatabaseHelper.saveRecord(score, finalElapsedSeconds);
-        // =============================================
+    public void saveScoreToDatabase() {
+        if(playerName==null || playerName.equals("")) return;
+        String dan="'",dou=",";
+        String table="table1";
+        String sql="UPDATE "+table+" SET max_exp ="+score+dou+"time ="+finalElapsedSeconds+" WHERE name= "+dan+playerName+dan+";";
+        MySQLDataBase dataBase=new MySQLDataBase();
+        if(!dataBase.connectionToDB()) return;
+        if(!dataBase.setStatement()) return;
+        dataBase.update(sql);
     }
 
     // ================= 渲染 =================
