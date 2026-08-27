@@ -17,7 +17,7 @@ class MenuListener implements ActionListener,MouseListener
     }
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==frame.bt[0]) {
-            SnakeGame.main();    //开始游戏：待接入贪吃蛇游戏主界面
+            SnakeGame.main(new String[0]);    //开始游戏：待接入贪吃蛇游戏主界面
         }
         if(e.getSource()==frame.bt[1]) {
             showData();

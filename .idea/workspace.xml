@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="新增：登录注册、主菜单界面">
+    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="merge">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snake.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Snake.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SnakeGame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Play/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/SnakeGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,12 +30,12 @@
     &quot;assignee&quot;: &quot;UnknownCyberStars&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/UnknownCyberStars/Greedy_Snake.git&quot;,
-    &quot;accountId&quot;: &quot;be82882c-fc9e-4d09-a723-f4a2b6c62c54&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nekomoxi/snake.git",
+    "accountId": "ece9d770-1896-485d-95bc-46a054019879"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -52,6 +51,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -79,8 +80,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28539.13" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28539.13" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.26222.65" />
       </set>
     </attachedChunks>
   </component>
@@ -101,6 +102,7 @@
       <workItem from="1787807668165" duration="433000" />
       <workItem from="1787812208985" duration="1469000" />
       <workItem from="1787813746483" duration="368000" />
+      <workItem from="1787816589356" duration="334000" />
     </task>
     <task id="LOCAL-00001" summary="新增MySQL数据库功能和完善登录注册界面">
       <option name="closed" value="true" />
@@ -150,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787813975053</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="merge">
+      <option name="closed" value="true" />
+      <created>1787816352633</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1787816352633</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,6 +180,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="新增MySQL数据库功能和完善登录注册界面" />
     <MESSAGE value="新增：登录注册、主菜单界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：登录注册、主菜单界面" />
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
 </project>
