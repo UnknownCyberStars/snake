@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.19.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Login/UserStart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
+    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="新增MySQL数据库功能和完善登录注册界面">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Greedy_Snake.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Greedy_Snake.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/MySQLDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MySQLDataBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/UserLogin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,8 +89,17 @@
       <workItem from="1787704262290" duration="1629000" />
       <workItem from="1787707092831" duration="18146000" />
       <workItem from="1787751419523" duration="6381000" />
-      <workItem from="1787790639901" duration="6767000" />
+      <workItem from="1787790639901" duration="7186000" />
     </task>
+    <task id="LOCAL-00001" summary="新增MySQL数据库功能和完善登录注册界面">
+      <option name="closed" value="true" />
+      <created>1787797707276</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1787797707276</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,5 +115,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="新增MySQL数据库功能和完善登录注册界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增MySQL数据库功能和完善登录注册界面" />
   </component>
 </project>
