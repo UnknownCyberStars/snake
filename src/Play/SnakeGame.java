@@ -32,7 +32,7 @@ public class SnakeGame extends JPanel {
     private static final int FRAME_MS = 16;         // 渲染帧间隔(约60fps)
 
     private enum Dir { UP, DOWN, LEFT, RIGHT }
-    private enum State { READY, RUNNING, PAUSED, GAME_OVER }
+    private enum State { LOGIN, READY, RUNNING, PAUSED, GAME_OVER }
 
     // ---------- 游戏状态 ----------
     private final List<Point> body = new ArrayList<>();  // 蛇身(棋盘格坐标, 头在 index 0)
@@ -48,6 +48,10 @@ public class SnakeGame extends JPanel {
     // ---------- 按钮 ----------
     private JButton restartBtn;
     private JButton menuBtn;
+
+    // ---------- 登录界面 ----------
+    private LoginPanel loginPanel;          // 内嵌登录面板(替代原开始界面)
+    private String currentUser;             // 当前登录用户名
 
     // ---------- 时间统计 ----------
     private long gameStartTime;          // 游戏开始（或恢复）时的系统时间
@@ -84,12 +88,38 @@ public class SnakeGame extends JPanel {
         logicTimer = new Timer(TICK_START, e -> step());
         renderTimer = new Timer(FRAME_MS, e -> repaint());
         resetGame();
+        // 初始进入登录界面(替代原 READY 开始界面)
+        loginPanel = new LoginPanel(this::onLoginSuccess);
+        loginPanel.setBounds((W - 420) / 2, (H - 450) / 2, 420, 450);
+        loginPanel.setVisible(true);
+        add(loginPanel);
+        state = State.LOGIN;
     }
 
     private void start() {
         logicTimer.start();
         renderTimer.start();
         requestFocusInWindow();
+        SwingUtilities.invokeLater(loginPanel::focusField);
+    }
+
+    // ================= 登录 =================
+
+    /** 登录成功: 隐藏登录面板, 进入 READY 等待开始 */
+    private void onLoginSuccess(String name) {
+        currentUser = name;
+        loginPanel.setVisible(false);
+        resetGame();
+        requestFocusInWindow();
+    }
+
+    /** 返回主菜单(登录界面) */
+    private void backToLogin() {
+        hideButtons();
+        state = State.LOGIN;
+        loginPanel.resetFields();
+        loginPanel.setVisible(true);
+        loginPanel.focusField();
     }
 
     // ================= 逻辑 =================
@@ -192,6 +222,7 @@ public class SnakeGame extends JPanel {
 
     private void onKey(int code) {
         if (code == KeyEvent.VK_ESCAPE) { System.exit(0); return; }
+        if (state == State.LOGIN) return;   // 登录界面按键交给登录面板处理
         if (code == KeyEvent.VK_R) { restart(Dir.RIGHT); return; }
         if (code == KeyEvent.VK_SPACE) {
             if (state == State.RUNNING) {
@@ -291,10 +322,7 @@ public class SnakeGame extends JPanel {
         menuBtn = new JButton("返回主菜单");
         // ... 样式设置 .../
         menuBtn.setVisible(false);
-        menuBtn.addActionListener(e -> {
-            Window w = SwingUtilities.getWindowAncestor(this);
-            if (w != null) w.dispose();
-        });
+        menuBtn.addActionListener(e -> backToLogin());   // 返回主菜单(登录界面)
 
         // 放置位置
         int btnW = 110, btnH = 40;
@@ -332,6 +360,13 @@ public class SnakeGame extends JPanel {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        if (state == State.LOGIN) {      // 登录界面: 仅绘制棋盘背景, 登录面板浮于其上
+            drawCheckerboard(g2);
+            g2.setColor(new Color(0x2a, 0x35, 0x4a));
+            g2.drawRect(0, 0, W - 1, H - 1);
+            g2.dispose();
+            return;
+        }
         drawCheckerboard(g2);
         drawFood(g2);
         drawSnake(g2);
@@ -448,7 +483,8 @@ public class SnakeGame extends JPanel {
             long totalSec = finalElapsedSeconds;
             String timeStr = String.format("%02d:%02d", totalSec / 60, totalSec % 60);
             msg = "游戏结束 · 得分 " + score;
-            sub = "总用时 " + timeStr + "  ·  点击下方按钮继续";
+            sub = "总用时 " + timeStr + " · 玩家 " + (currentUser == null ? "" : currentUser)
+                    + "  ·  点击下方按钮继续";
         }
         if (msg == null) return;
         g2.setColor(new Color(0, 0, 0, 150));
