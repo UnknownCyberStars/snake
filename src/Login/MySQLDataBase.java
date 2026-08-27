@@ -129,27 +129,50 @@ public class MySQLDataBase
         }
     }
 
+    //【修改】表结构已删除 max_color 字段，表头与数据行同步移除"颜色"列
     public String queryData(String sql) {
         StringBuilder sb=new StringBuilder();
         try {
             resultSet=statement.executeQuery(sql);
             //表头
-            sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-10s\t%-20s\t%-15s\n", "序号", "用户名", "密码", "最高经验", "颜色", "得分时间", "电话号码"));
+            sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-20s\t%-15s\n", "序号", "用户名", "密码", "最高经验", "得分时间", "电话号码"));
             while (resultSet.next()) {
                 int number=resultSet.getInt("number");
                 String name=resultSet.getString("name");
                 String password=resultSet.getString("password");
                 int maxExp=resultSet.getInt("max_exp");
-                String maxColor=resultSet.getString("max_color");
                 String time=resultSet.getString("time");
                 String phonenumber=resultSet.getString("phonenumber");
-                sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-10s\t%-20s\t%-15s\n", number, name, password, maxExp, maxColor, time, phonenumber));
+                sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-20s\t%-15s\n", number, name, password, maxExp, time, phonenumber));
             }
         } catch(Exception e) {
             System.out.println("查询操作异常："+sql);
             return "查询出现异常";
         }
         return sb.toString();
+    }
+
+    //【新增】查询所有玩家数据，按行返回（用户名、最大经验得分、时间、电话号码），供主菜单"数据统计"界面的表格使用
+    public Vector<Vector<String>> queryPlayersForTable(String sql) {
+        Vector<Vector<String>> rows=new Vector<Vector<String>>();
+        if (statement == null) {
+            System.out.println("查询操作失败：statement 为空，请先调用 setStatement()");
+            return rows;
+        }
+        try {
+            resultSet=statement.executeQuery(sql);
+            while (resultSet.next()) {
+                Vector<String> row=new Vector<String>();
+                row.add(resultSet.getString("name"));
+                row.add(String.valueOf(resultSet.getInt("max_exp")));
+                row.add(resultSet.getString("time"));
+                row.add(resultSet.getString("phonenumber"));
+                rows.add(row);
+            }
+        } catch(Exception e) {
+            System.out.println("查询操作异常："+sql);
+        }
+        return rows;
     }
 
     public void delete(String sql) {
