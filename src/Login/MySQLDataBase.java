@@ -12,6 +12,7 @@ public class MySQLDataBase
     private String url;            // 数据库连接地址
     private String user;           // 用户名
     private String password;       // 密码
+    private String tableName;
 
     //构造方法的作用是调用加载 src/db.properties 配置文件的loadConfig()方法
     //loadConfig()方法从 src/db.properties 读取MySQL数据库的连接参数
@@ -29,6 +30,7 @@ public class MySQLDataBase
             String dbName = props.getProperty("db.name");
             this.user = props.getProperty("db.user");
             this.password = props.getProperty("db.password");
+            this.tableName = props.getProperty("db.name");
 
             //拼接 MySQL 连接 URL（带时区和安全参数）
             this.url = "jdbc:mysql://" + host + ":" + port + "/" + dbName + "?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
@@ -129,19 +131,18 @@ public class MySQLDataBase
         }
     }
 
-    //【修改】表结构已删除 max_color 字段，表头与数据行同步移除"颜色"列
     public String queryData(String sql) {
         StringBuilder sb=new StringBuilder();
         try {
             resultSet=statement.executeQuery(sql);
             //表头
-            sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-20s\t%-15s\n", "序号", "用户名", "密码", "最高经验", "得分时间", "电话号码"));
+            sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-20s\t%-15s\n", "序号", "用户名", "密码", "最高经验", "用时(秒)", "电话号码"));
             while (resultSet.next()) {
                 int number=resultSet.getInt("number");
                 String name=resultSet.getString("name");
                 String password=resultSet.getString("password");
                 int maxExp=resultSet.getInt("max_exp");
-                String time=resultSet.getString("time");
+                int time=resultSet.getInt("time");
                 String phonenumber=resultSet.getString("phonenumber");
                 sb.append(String.format("%-8s\t%-12s\t%-12s\t%-10s\t%-20s\t%-15s\n", number, name, password, maxExp, time, phonenumber));
             }
@@ -152,7 +153,6 @@ public class MySQLDataBase
         return sb.toString();
     }
 
-    //【新增】查询所有玩家数据，按行返回（用户名、最大经验得分、时间、电话号码），供主菜单"数据统计"界面的表格使用
     public Vector<Vector<String>> queryPlayersForTable(String sql) {
         Vector<Vector<String>> rows=new Vector<Vector<String>>();
         if (statement == null) {
@@ -165,7 +165,7 @@ public class MySQLDataBase
                 Vector<String> row=new Vector<String>();
                 row.add(resultSet.getString("name"));
                 row.add(String.valueOf(resultSet.getInt("max_exp")));
-                row.add(resultSet.getString("time"));
+                row.add(String.valueOf(resultSet.getInt("time")));
                 row.add(resultSet.getString("phonenumber"));
                 rows.add(row);
             }

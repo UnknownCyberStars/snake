@@ -96,20 +96,6 @@ class MyListener implements ActionListener,KeyListener,MouseListener
         panel.add(lb[3]);panel.add(pf[1]);
         panel.setPreferredSize(new Dimension(380, 180));
 
-        KeyAdapter enterListener=new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-                    Window window=SwingUtilities.getWindowAncestor(panel);//由输入的panel面板找到包含了该面板的注册窗口本身
-                    JButton okButton=findOkButton(window);    //在注册窗口中找到确定按钮
-                    if(okButton!=null) okButton.doClick();
-                }
-            }
-        };
-        tf[0].addKeyListener(enterListener);
-        tf[1].addKeyListener(enterListener);
-        pf[0].addKeyListener(enterListener);
-        pf[1].addKeyListener(enterListener);
-
         //循环出现注册对话框
         while(true) {
             int result=JOptionPane.showConfirmDialog(frame,panel,"贪吃蛇游戏——用户注册界面",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
@@ -152,27 +138,12 @@ class MyListener implements ActionListener,KeyListener,MouseListener
                 JOptionPane.showMessageDialog(frame,"该用户名已被注册，请更换用户名！","注册失败",JOptionPane.WARNING_MESSAGE);
                 continue;
             }
-            String sql="INSERT INTO table1(name, password, max_exp, time, phonenumber) VALUES(" +dan+name+dan+","+dan+password1+dan+",0,NOW(),"+dan+phone+dan+")";
+            String sql="INSERT INTO table1(name, password, max_exp, time, phonenumber) VALUES(" +dan+name+dan+","+dan+password1+dan+",0,0,"+dan+phone+dan+")";
             if(dataBase.insert(sql)) {
                 JOptionPane.showMessageDialog(frame,"注册成功，请使用新账户登录！","恭喜",JOptionPane.INFORMATION_MESSAGE);
                 return;
-            } else {
-                JOptionPane.showMessageDialog(frame,"注册失败，请稍后重试！","注册失败",JOptionPane.ERROR_MESSAGE);
-                continue;
-            }
+            } else JOptionPane.showMessageDialog(frame,"注册失败，请稍后重试！","注册失败",JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public JButton findOkButton(Container container) {
-        if(container==null) return null;
-        for(Component comp:container.getComponents()) {
-            if(comp instanceof JButton) return (JButton)comp;
-            if(comp instanceof Container) {
-                JButton b=findOkButton((Container)comp);//递归
-                if(b!=null) return b;
-            }
-        }
-        return null;
     }
 
     public void login(String name,String password) {
@@ -193,7 +164,7 @@ class MyListener implements ActionListener,KeyListener,MouseListener
         } else if(result[0].equals(password)) {
             JOptionPane.showMessageDialog(frame,"验证通过，登录成功！","恭喜",JOptionPane.INFORMATION_MESSAGE);
             frame.dispose();
-            new MainMenu();
+            new MainMenu(name);
         } else {
             JOptionPane.showMessageDialog(frame,"账号和密码不一致，请重新输入！","登录失败",JOptionPane.WARNING_MESSAGE);
         }
@@ -222,7 +193,7 @@ public class UserLogin extends JFrame
         setLayout(new GridLayout(7,1));
         setBounds(250,200,460,400);
 
-        Color bgColor=new Color(245,250,245);
+        Color bgColor=new Color(40,44,52);
         Color titleColor=new Color(46,125,50);
         Color accentColor=new Color(76,175,80);
         Color textColor=new Color(90,90,90);
@@ -254,11 +225,11 @@ public class UserLogin extends JFrame
         for(int i=0;i<tf.length;i++) {
             tf[i].setFont(new Font("微软雅黑", Font.PLAIN, 14));
             tf[i].setPreferredSize(new Dimension(180,30));
-            tf[i].setMinimumSize(new Dimension(80,30));    //【修复】允许文本框在空间不足时收缩，保证右侧错误提示始终完整可见
+            tf[i].setMinimumSize(new Dimension(80,30));
         }
         pf.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         pf.setPreferredSize(new Dimension(180,30));
-        pf.setMinimumSize(new Dimension(80,30));           //【修复】同上，允许密码框收缩
+        pf.setMinimumSize(new Dimension(80,30));
 
         //按钮
         styleButton(bt[0], accentColor);

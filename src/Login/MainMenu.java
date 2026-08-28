@@ -17,7 +17,7 @@ class MenuListener implements ActionListener,MouseListener
     }
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==frame.bt[0]) {
-            SnakeGame.main(new String[0]);    //开始游戏：待接入贪吃蛇游戏主界面
+            SnakeGame.main(new String[]{frame.userName});    //开始游戏：接入贪吃蛇游戏中界面
         }
         if(e.getSource()==frame.bt[1]) {
             showData();
@@ -50,7 +50,7 @@ class MenuListener implements ActionListener,MouseListener
         Vector<String> columnNames=new Vector<String>();
         columnNames.add("用户名");
         columnNames.add("最大经验得分");
-        columnNames.add("time");
+        columnNames.add("用时(秒)");
         columnNames.add("电话号码");
         Vector<Vector<String>> rows=dataBase.queryPlayersForTable("SELECT name,max_exp,time,phonenumber FROM table1");
         JTable table=new JTable(rows,columnNames) {
@@ -75,8 +75,10 @@ public class MainMenu extends JFrame
     String []button={"开始游戏","数据统计","关于我们","退出游戏"};
     JPanel []pn=new JPanel[5];
     MenuListener listener;
+    String userName;
 
-    public MainMenu() {
+    public MainMenu(String userName) {
+        this.userName=userName;
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -93,7 +95,7 @@ public class MainMenu extends JFrame
         setLayout(new GridLayout(5,1));
         setBounds(250,200,420,400);
 
-        Color bgColor=new Color(245,250,245);
+        Color bgColor=new Color(40,44,52);
         Color accentColor=new Color(76,175,80);
 
         for(int i=0;i<lb.length;i++) lb[i]=new JLabel(label[i]);
