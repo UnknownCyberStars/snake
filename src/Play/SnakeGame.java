@@ -1,6 +1,7 @@
 package Play;
 
 import Login.MainMenu;
+import Login.MySQLDataBase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -265,22 +266,14 @@ public class SnakeGame extends JPanel {
         return elapsed / 1000;
     }
     private void saveScoreToDatabase() {
-        // =============================================
-        //预留接口：等数据库完成后在此处接入
-        // 需要的参数：score（得分），finalElapsedSeconds（用时秒数）
-        // =============================================
-
-        // 目前先打印到控制台，方便测试
-        System.out.println("📝 准备保存到数据库:");
-        System.out.println("   得分: " + score);
-        System.out.println("   用时: " + finalElapsedSeconds + " 秒");
-        System.out.println("   时间: " + String.format("%02d:%02d",
-                finalElapsedSeconds / 60, finalElapsedSeconds % 60));
-
-        // =============================================
-        // 以后替换为：
-        // DatabaseHelper.saveRecord(score, finalElapsedSeconds);
-        // =============================================
+        if(playerName==null || playerName.equals("")) return;
+        String dan="'",dou=",";
+        // max_exp 取历史最大值; time 列为 INT 秒数, 记录本局用时
+        String sql="UPDATE table1 SET max_exp=GREATEST(max_exp,"+score+")"+dou+"time="+finalElapsedSeconds+" WHERE name="+dan+playerName+dan;
+        MySQLDataBase dataBase=new MySQLDataBase();
+        if(!dataBase.connectionToDB()) return;
+        if(!dataBase.setStatement()) return;
+        dataBase.update(sql);
     }
 
     // ================= 渲染 =================

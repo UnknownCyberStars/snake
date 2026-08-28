@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="新增：登录界面的修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/MySQLDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MySQLDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/UserLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +34,12 @@
     &quot;state&quot;: &quot;OPEN&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/UnknownCyberStars/snake&quot;,
-    &quot;accountId&quot;: &quot;be82882c-fc9e-4d09-a723-f4a2b6c62c54&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/nekomoxi/snake.git",
+    "accountId": "ece9d770-1896-485d-95bc-46a054019879"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -85,8 +84,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28539.13" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28539.13" />
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.26222.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.26222.65" />
       </set>
     </attachedChunks>
   </component>

@@ -271,7 +271,7 @@ public class LoginPanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "该用户名已被注册，请更换用户名！", "注册失败", JOptionPane.WARNING_MESSAGE);
                 continue;
             }
-            String sql = "INSERT INTO table1(name, password, max_exp, time, phonenumber) VALUES(" + dan + name + dan + "," + dan + password1 + dan + ",0,NOW()," + dan + phone + dan + ")";
+            String sql = "INSERT INTO table1(name, password, max_exp, time, phonenumber) VALUES(" + dan + name + dan + "," + dan + password1 + dan + ",0,0," + dan + phone + dan + ")";
             if (dataBase.insert(sql)) {
                 JOptionPane.showMessageDialog(this, "注册成功，请使用新账户登录！", "恭喜", JOptionPane.INFORMATION_MESSAGE);
                 return;
