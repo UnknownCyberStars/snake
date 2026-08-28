@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="更改界面文字">
+    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="新增：登录界面的修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Login/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Play/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/SnakeGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login/MySQLDataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MySQLDataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,6 +231,7 @@
     <MESSAGE value="新增：完善游戏结束后的数据库更新功能" />
     <MESSAGE value="修改按钮" />
     <MESSAGE value="更改界面文字" />
-    <option name="LAST_COMMIT_MESSAGE" value="更改界面文字" />
+    <MESSAGE value="新增：登录界面的修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增：登录界面的修改" />
   </component>
 </project>

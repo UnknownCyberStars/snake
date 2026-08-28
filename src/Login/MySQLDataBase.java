@@ -153,26 +153,26 @@ public class MySQLDataBase
         return sb.toString();
     }
 
-    public Vector<Vector<String>> queryPlayersForTable(String sql) {
-        Vector<Vector<String>> rows=new Vector<Vector<String>>();
+    public String[][] queryPlayersForTable(String sql) {
+        ArrayList<String[]> rows=new ArrayList<String[]>();
         if (statement == null) {
             System.out.println("查询操作失败：statement 为空，请先调用 setStatement()");
-            return rows;
+            return new String[0][];
         }
         try {
             resultSet=statement.executeQuery(sql);
             while (resultSet.next()) {
-                Vector<String> row=new Vector<String>();
-                row.add(resultSet.getString("name"));
-                row.add(String.valueOf(resultSet.getInt("max_exp")));
-                row.add(String.valueOf(resultSet.getInt("time")));
-                row.add(resultSet.getString("phonenumber"));
+                String[] row=new String[4];
+                row[0]=resultSet.getString("name");
+                row[1]=String.valueOf(resultSet.getInt("max_exp"));
+                row[2]=String.valueOf(resultSet.getInt("time"));
+                row[3]=resultSet.getString("phonenumber");
                 rows.add(row);
             }
         } catch(Exception e) {
             System.out.println("查询操作异常："+sql);
         }
-        return rows;
+        return rows.toArray(new String[0][]);
     }
 
     public void delete(String sql) {

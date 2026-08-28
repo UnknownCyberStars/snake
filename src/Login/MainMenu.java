@@ -5,7 +5,6 @@ import Play.SnakeGame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 class MenuListener implements ActionListener,MouseListener
 {
@@ -17,7 +16,7 @@ class MenuListener implements ActionListener,MouseListener
     }
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==frame.bt[0]) {
-            frame.dispose();                              //关闭主菜单，避免与游戏窗口同屏
+            frame.dispose();
             SnakeGame.main(new String[]{frame.userName}); //开始游戏：接入贪吃蛇游戏中界面
         }
         if(e.getSource()==frame.bt[1]) {
@@ -27,7 +26,7 @@ class MenuListener implements ActionListener,MouseListener
             JOptionPane.showMessageDialog(frame,"制作成员：孙凌龙、疏程飞、张泽旭\n制作时间：2026.8.24-2026.8.28","贪吃蛇游戏-主菜单界面-关于我们",JOptionPane.INFORMATION_MESSAGE);
         }
         if(e.getSource()==frame.bt[3]) {
-            frame.dispose();                              //切换账号：关闭主菜单，回到登录窗口
+            frame.dispose();
             new UserLogin();
         }
         if(e.getSource()==frame.bt[4]) {
@@ -52,17 +51,14 @@ class MenuListener implements ActionListener,MouseListener
             JOptionPane.showMessageDialog(frame,"数据库初始化失败！","数据统计",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Vector<String> columnNames=new Vector<String>();
-        columnNames.add("用户名");
-        columnNames.add("最大经验得分");
-        columnNames.add("用时(秒)");
-        columnNames.add("电话号码");
-        Vector<Vector<String>> rows=dataBase.queryPlayersForTable("SELECT name,max_exp,time,phonenumber FROM table1");
+        String[] columnNames={"用户名","最大经验得分","用时(秒)","电话号码"};
+        String[][] rows=dataBase.queryPlayersForTable("SELECT name,max_exp,time,phonenumber FROM table1");
         JTable table=new JTable(rows,columnNames) {
             public boolean isCellEditable(int row,int column) {
                 return false;
             }
         };
+        table.getTableHeader().setReorderingAllowed(false);
         table.setRowHeight(26);
         JScrollPane scrollPane=new JScrollPane(table);
         JFrame dataFrame=new JFrame("贪吃蛇游戏——数据统计");
