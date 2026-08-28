@@ -1,7 +1,5 @@
 package Play;
 
-import Login.MySQLDataBase;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -34,7 +32,7 @@ public class SnakeGame extends JPanel {
     private static final int FRAME_MS = 16;         // 渲染帧间隔(约60fps)
 
     private enum Dir { UP, DOWN, LEFT, RIGHT }
-    private enum State { LOGIN, READY, RUNNING, PAUSED, GAME_OVER }
+    private enum State { READY, RUNNING, PAUSED, GAME_OVER }
 
     // ---------- 游戏状态 ----------
     private final List<Point> body = new ArrayList<>();  // 蛇身(棋盘格坐标, 头在 index 0)
@@ -51,19 +49,13 @@ public class SnakeGame extends JPanel {
     private JButton restartBtn;
     private JButton menuBtn;
 
-    // ---------- 登录界面 ----------
-    private LoginPanel loginPanel;          // 内嵌登录面板(替代原开始界面)
-    private String currentUser;             // 当前登录用户名
-
     // ---------- 时间统计 ----------
     private long gameStartTime;          // 游戏开始（或恢复）时的系统时间
     private long totalPausedTime = 0;    // 累计暂停时间（毫秒）
     private long pauseStartTime = 0;     // 进入暂停时的系统时间
     private long finalElapsedSeconds = 0; // 游戏结束时保存的总秒数
-    private static String playerName = "";
 
     public static void main(String[] args) {
-        if (args.length > 0) playerName = args[0];
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("贪吃蛇 — ESC 退出");
             frame.setResizable(false);
@@ -92,38 +84,12 @@ public class SnakeGame extends JPanel {
         logicTimer = new Timer(TICK_START, e -> step());
         renderTimer = new Timer(FRAME_MS, e -> repaint());
         resetGame();
-        // 初始进入登录界面(替代原 READY 开始界面)
-        loginPanel = new LoginPanel(this::onLoginSuccess);
-        loginPanel.setBounds((W - 420) / 2, (H - 450) / 2, 420, 450);
-        loginPanel.setVisible(true);
-        add(loginPanel);
-        state = State.LOGIN;
     }
 
     private void start() {
         logicTimer.start();
         renderTimer.start();
         requestFocusInWindow();
-        SwingUtilities.invokeLater(loginPanel::focusField);
-    }
-
-    // ================= 登录 =================
-
-    /** 登录成功: 隐藏登录面板, 进入 READY 等待开始 */
-    private void onLoginSuccess(String name) {
-        currentUser = name;
-        loginPanel.setVisible(false);
-        resetGame();
-        requestFocusInWindow();
-    }
-
-    /** 返回主菜单(登录界面) */
-    private void backToLogin() {
-        hideButtons();
-        state = State.LOGIN;
-        loginPanel.resetFields();
-        loginPanel.setVisible(true);
-        loginPanel.focusField();
     }
 
     // ================= 逻辑 =================
@@ -226,7 +192,6 @@ public class SnakeGame extends JPanel {
 
     private void onKey(int code) {
         if (code == KeyEvent.VK_ESCAPE) { System.exit(0); return; }
-        if (state == State.LOGIN) return;   // 登录界面按键交给登录面板处理
         if (code == KeyEvent.VK_R) { restart(Dir.RIGHT); return; }
         if (code == KeyEvent.VK_SPACE) {
             if (state == State.RUNNING) {
@@ -288,15 +253,23 @@ public class SnakeGame extends JPanel {
         long elapsed = current - gameStartTime - totalPausedTime;
         return elapsed / 1000;
     }
-    public void saveScoreToDatabase() {
-        if(playerName==null || playerName.equals("")) return;
-        String dan="'",dou=",";
-        String table="table1";
-        String sql="UPDATE "+table+" SET max_exp ="+score+dou+"time ="+finalElapsedSeconds+" WHERE name= "+dan+playerName+dan+";";
-        MySQLDataBase dataBase=new MySQLDataBase();
-        if(!dataBase.connectionToDB()) return;
-        if(!dataBase.setStatement()) return;
-        dataBase.update(sql);
+    private void saveScoreToDatabase() {
+        // =============================================
+        //预留接口：等数据库完成后在此处接入
+        // 需要的参数：score（得分），finalElapsedSeconds（用时秒数）
+        // =============================================
+
+        // 目前先打印到控制台，方便测试
+        System.out.println("📝 准备保存到数据库:");
+        System.out.println("   得分: " + score);
+        System.out.println("   用时: " + finalElapsedSeconds + " 秒");
+        System.out.println("   时间: " + String.format("%02d:%02d",
+                finalElapsedSeconds / 60, finalElapsedSeconds % 60));
+
+        // =============================================
+        // 以后替换为：
+        // DatabaseHelper.saveRecord(score, finalElapsedSeconds);
+        // =============================================
     }
 
     // ================= 渲染 =================
@@ -305,7 +278,7 @@ public class SnakeGame extends JPanel {
         // 重新开始按钮
         restartBtn = new JButton("重新开始");
         restartBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
-        restartBtn.setForeground(Color.WHITE);
+        //restartBtn.setForeground(Color.WHITE);
         restartBtn.setBackground(new Color(60, 80, 100));
         // ... 样式设置 ...
         restartBtn.setVisible(false);
@@ -316,9 +289,13 @@ public class SnakeGame extends JPanel {
 
         // 返回主菜单按钮
         menuBtn = new JButton("返回主菜单");
+        menuBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
         // ... 样式设置 .../
         menuBtn.setVisible(false);
-        menuBtn.addActionListener(e -> backToLogin());   // 返回主菜单(登录界面)
+        menuBtn.addActionListener(e -> {
+            Window w = SwingUtilities.getWindowAncestor(this);
+            if (w != null) w.dispose();
+        });
 
         // 放置位置
         int btnW = 110, btnH = 40;
@@ -356,13 +333,6 @@ public class SnakeGame extends JPanel {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        if (state == State.LOGIN) {      // 登录界面: 仅绘制棋盘背景, 登录面板浮于其上
-            drawCheckerboard(g2);
-            g2.setColor(new Color(0x2a, 0x35, 0x4a));
-            g2.drawRect(0, 0, W - 1, H - 1);
-            g2.dispose();
-            return;
-        }
         drawCheckerboard(g2);
         drawFood(g2);
         drawSnake(g2);
@@ -479,8 +449,7 @@ public class SnakeGame extends JPanel {
             long totalSec = finalElapsedSeconds;
             String timeStr = String.format("%02d:%02d", totalSec / 60, totalSec % 60);
             msg = "游戏结束 · 得分 " + score;
-            sub = "总用时 " + timeStr + " · 玩家 " + (currentUser == null ? "" : currentUser)
-                    + "  ·  点击下方按钮继续";
+            sub = "总用时 " + timeStr + "  ·  点击下方按钮继续";
         }
         if (msg == null) return;
         g2.setColor(new Color(0, 0, 0, 150));

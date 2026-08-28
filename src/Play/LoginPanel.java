@@ -32,7 +32,7 @@ public class LoginPanel extends JPanel {
         this.callback = callback;
         setOpaque(false);
         setLayout(new GridBagLayout());
-        setPreferredSize(new Dimension(420, 450));
+        setPreferredSize(new Dimension(380, 440));
         buildUI();
     }
 
@@ -90,19 +90,14 @@ public class LoginPanel extends JPanel {
         add(btnRow, gbc);
 
         JLabel register = new JLabel("<html><u>还没有账户？点击这里注册！</u></html>");
-        register.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        register.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
         register.setForeground(new Color(0x4d, 0xa3, 0xff));
         register.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        register.setHorizontalAlignment(SwingConstants.CENTER);
-        register.setPreferredSize(new Dimension(300, 36));
-        register.setMinimumSize(new Dimension(300, 36));   // 防止布局收缩导致文字换行
         register.addMouseListener(new MouseAdapter() {
             @Override public void mouseClicked(MouseEvent e) { register(); }
         });
         gbc.gridy = 6;
         gbc.insets = new Insets(6, 24, 12, 24);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1.0;
         add(register, gbc);
 
         KeyAdapter enter = new KeyAdapter() {

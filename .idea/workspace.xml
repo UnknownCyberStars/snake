@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="merge">
-      <change afterPath="$PROJECT_DIR$/src/Play/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Play/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/LoginPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Play/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/SnakeGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
