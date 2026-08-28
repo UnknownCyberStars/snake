@@ -7,8 +7,6 @@
     <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="merge">
       <change afterPath="$PROJECT_DIR$/src/Play/LoginPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/UserLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Play/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/SnakeGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +35,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/nekomoxi/snake.git&quot;,
-    &quot;accountId&quot;: &quot;ece9d770-1896-485d-95bc-46a054019879&quot;
+    &quot;url&quot;: &quot;https://github.com/UnknownCyberStars/snake&quot;,
+    &quot;accountId&quot;: &quot;be82882c-fc9e-4d09-a723-f4a2b6c62c54&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -107,8 +105,9 @@
       <workItem from="1787807668165" duration="433000" />
       <workItem from="1787812208985" duration="1469000" />
       <workItem from="1787813746483" duration="368000" />
-      <workItem from="1787816589356" duration="1131000" />
-      <workItem from="1787818659989" duration="628000" />
+      <workItem from="1787816589356" duration="334000" />
+      <workItem from="1787843715081" duration="4228000" />
+      <workItem from="1787878151243" duration="310000" />
     </task>
     <task id="LOCAL-00001" summary="新增MySQL数据库功能和完善登录注册界面">
       <option name="closed" value="true" />
@@ -174,7 +173,23 @@
       <option name="project" value="LOCAL" />
       <updated>1787816964116</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="新增：完善游戏结束后的数据库更新功能">
+      <option name="closed" value="true" />
+      <created>1787847963383</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1787847963383</updated>
+    </task>
+    <task id="LOCAL-00010" summary="新增：登录界面的修改">
+      <option name="closed" value="true" />
+      <created>1787878457331</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1787878457331</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
