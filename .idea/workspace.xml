@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="新增：完善游戏结束后的数据库更新功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login/UserLogin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +28,12 @@
     &quot;assignee&quot;: &quot;UnknownCyberStars&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/UnknownCyberStars/snake",
-    "accountId": "be82882c-fc9e-4d09-a723-f4a2b6c62c54"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/UnknownCyberStars/snake&quot;,
+    &quot;accountId&quot;: &quot;be82882c-fc9e-4d09-a723-f4a2b6c62c54&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -103,7 +101,7 @@
       <workItem from="1787812208985" duration="1469000" />
       <workItem from="1787813746483" duration="368000" />
       <workItem from="1787816589356" duration="334000" />
-      <workItem from="1787843715081" duration="4181000" />
+      <workItem from="1787843715081" duration="4228000" />
     </task>
     <task id="LOCAL-00001" summary="新增MySQL数据库功能和完善登录注册界面">
       <option name="closed" value="true" />
@@ -169,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787822602128</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="新增：完善游戏结束后的数据库更新功能">
+      <option name="closed" value="true" />
+      <created>1787847963383</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1787847963383</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
