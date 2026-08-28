@@ -1,5 +1,7 @@
 package Play;
 
+import Login.MainMenu;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -18,7 +20,7 @@ import java.util.Random;
  *  - 穿行模式: 蛇移动到窗口边缘时不会死亡, 而是从对侧边界出现
  *  - 只有蛇撞到自己才会死亡
  *
- * 操作: 方向键/WASD 转向, 空格 暂停, R 重新开始, ESC 退出
+ * 操作: 方向键/WASD 转向, 空格 暂停, R 重新开始, ESC 返回主菜单
  */
 public class SnakeGame extends JPanel {
 
@@ -54,8 +56,10 @@ public class SnakeGame extends JPanel {
     private long totalPausedTime = 0;    // 累计暂停时间（毫秒）
     private long pauseStartTime = 0;     // 进入暂停时的系统时间
     private long finalElapsedSeconds = 0; // 游戏结束时保存的总秒数
+    private static String playerName = "";  // 当前登录用户名(由主菜单传入)
 
     public static void main(String[] args) {
+        if (args.length > 0) playerName = args[0];
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("贪吃蛇");
             frame.setResizable(false);
@@ -191,7 +195,7 @@ public class SnakeGame extends JPanel {
     }
 
     private void onKey(int code) {
-        if (code == KeyEvent.VK_ESCAPE) { System.exit(0); return; }
+        if (code == KeyEvent.VK_ESCAPE) { exitToMainMenu(); return; }
         if (code == KeyEvent.VK_R) { restart(Dir.RIGHT); return; }
         if (code == KeyEvent.VK_SPACE) {
             if (state == State.RUNNING) {
@@ -210,6 +214,13 @@ public class SnakeGame extends JPanel {
         } else {
             if (!isOpposite(d, dir)) pendingDir = d;
         }
+    }
+
+    /** 返回主菜单窗口(关闭当前游戏窗口) */
+    private void exitToMainMenu() {
+        Window w = SwingUtilities.getWindowAncestor(this);
+        if (w != null) w.dispose();
+        new MainMenu(playerName);
     }
 
     private static Dir dirOf(int code) {
@@ -292,10 +303,7 @@ public class SnakeGame extends JPanel {
         menuBtn.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 16));
         // ... 样式设置 .../
         menuBtn.setVisible(false);
-        menuBtn.addActionListener(e -> {
-            Window w = SwingUtilities.getWindowAncestor(this);
-            if (w != null) w.dispose();
-        });
+        menuBtn.addActionListener(e -> exitToMainMenu());
 
         // 放置位置
         int btnW = 110, btnH = 40;
@@ -425,7 +433,7 @@ public class SnakeGame extends JPanel {
         drawText(g2, "时间 " + timeStr, W - timeWidth - 12, 24, Color.WHITE);
         //帮助信息
         g2.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 12));
-        String help = "方向键/WASD 转向 · 空格 暂停 · R 重开 · ESC 退出";
+        String help = "方向键/WASD 转向 · 空格 暂停 · R 重开 · ESC 返回主菜单";
         drawText(g2, help, W / 2 - g2.getFontMetrics().stringWidth(help) / 2, H - 14,
                  new Color(0x8a, 0x94, 0xa3));
     }

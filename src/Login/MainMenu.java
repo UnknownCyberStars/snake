@@ -17,7 +17,8 @@ class MenuListener implements ActionListener,MouseListener
     }
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==frame.bt[0]) {
-            SnakeGame.main(new String[]{frame.userName});    //开始游戏：接入贪吃蛇游戏中界面
+            frame.dispose();                              //关闭主菜单，避免与游戏窗口同屏
+            SnakeGame.main(new String[]{frame.userName}); //开始游戏：接入贪吃蛇游戏中界面
         }
         if(e.getSource()==frame.bt[1]) {
             showData();
@@ -26,6 +27,10 @@ class MenuListener implements ActionListener,MouseListener
             JOptionPane.showMessageDialog(frame,"制作成员：孙凌龙、疏程飞、张泽旭\n制作时间：2026.8.24-2026.8.28","贪吃蛇游戏-主菜单界面-关于我们",JOptionPane.INFORMATION_MESSAGE);
         }
         if(e.getSource()==frame.bt[3]) {
+            frame.dispose();                              //切换账号：关闭主菜单，回到登录窗口
+            new UserLogin();
+        }
+        if(e.getSource()==frame.bt[4]) {
             int n=JOptionPane.showConfirmDialog(frame,"确认退出游戏吗？","贪吃蛇游戏-主菜单界面-退出游戏",JOptionPane.YES_NO_OPTION);
             if(n==JOptionPane.YES_OPTION) System.exit(0);
         }
@@ -71,9 +76,9 @@ public class MainMenu extends JFrame
 {
     JLabel []lb=new JLabel[1];
     String []label={"主菜单界面"};
-    JButton []bt=new JButton[4];
-    String []button={"开始游戏","数据统计","关于我们","退出游戏"};
-    JPanel []pn=new JPanel[5];
+    JButton []bt=new JButton[5];
+    String []button={"开始游戏","数据统计","关于我们","切换账号","退出游戏"};
+    JPanel []pn=new JPanel[6];
     MenuListener listener;
     String userName;
 
@@ -92,8 +97,8 @@ public class MainMenu extends JFrame
     }
     public void initial() {
         setTitle("贪吃蛇游戏——主菜单界面");
-        setLayout(new GridLayout(5,1));
-        setBounds(250,200,420,400);
+        setLayout(new GridLayout(6,1));
+        setBounds(250,200,420,440);
 
         Color bgColor=new Color(40,44,52);
         Color accentColor=new Color(76,175,80);
@@ -121,6 +126,7 @@ public class MainMenu extends JFrame
         pn[2].add(bt[1]);
         pn[3].add(bt[2]);
         pn[4].add(bt[3]);
+        pn[5].add(bt[4]);
         for(int i=0;i<pn.length;i++) add(pn[i]);
     }
 
