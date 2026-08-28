@@ -281,7 +281,11 @@ public class UserLogin extends JFrame
         });
     }
     public static void main(String[] args) {
-        //登录界面已整合进游戏主界面(单窗口闭环)，此处直接启动游戏
-        Play.SnakeGame.main(new String[0]);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        new UserLogin();
     }
 }
