@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="merge">
-      <change beforePath="$PROJECT_DIR$/src/Play/LoginPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/LoginPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Play/SnakeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Play/SnakeGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.properties" afterDir="false" />
-    </list>
+    <list default="true" id="d980e23d-87a6-4f46-83ee-69a6f8a167da" name="更改" comment="修改按钮" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -190,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787878457331</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="修改按钮">
+      <option name="closed" value="true" />
+      <created>1787880046630</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1787880046630</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,6 +216,7 @@
     <MESSAGE value="新增：登录注册、主菜单界面" />
     <MESSAGE value="merge" />
     <MESSAGE value="新增：完善游戏结束后的数据库更新功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增：完善游戏结束后的数据库更新功能" />
+    <MESSAGE value="修改按钮" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改按钮" />
   </component>
 </project>

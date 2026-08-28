@@ -57,7 +57,7 @@ public class SnakeGame extends JPanel {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("贪吃蛇 — ESC 退出");
+            JFrame frame = new JFrame("贪吃蛇");
             frame.setResizable(false);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             SnakeGame game = new SnakeGame();
@@ -441,7 +441,7 @@ public class SnakeGame extends JPanel {
         String msg = null, sub = null;
         if (state == State.READY) {
             msg = "贪吃蛇";
-            sub = "按任意方向键开始 — 穿过边界会从对面出现";
+            sub = "按任意方向键开始";
         } else if (state == State.PAUSED) {
             msg = "已暂停";
             sub = "按空格继续";
